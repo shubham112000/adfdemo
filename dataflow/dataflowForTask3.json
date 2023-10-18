@@ -1,0 +1,70 @@
+{
+	"name": "dataflowForTask3",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_SQL_TASK3",
+						"type": "DatasetReference"
+					},
+					"name": "killDeath"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_LAKE_TASK3_OUTPUT",
+						"type": "DatasetReference"
+					},
+					"name": "filteredData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregationOnMap"
+				},
+				{
+					"name": "filterForKills"
+				},
+				{
+					"name": "sort1"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     killvalue as integer (300)",
+				"}",
+				"source(output(",
+				"          map_description as string,",
+				"          game_type as string,",
+				"          weapon_description as string,",
+				"          weapon_group as string,",
+				"          weapon_class as string,",
+				"          deaths as integer,",
+				"          kills as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> killDeath",
+				"killDeath aggregate(groupBy(map_description,",
+				"          weapon_description),",
+				"     totalKills = sum(kills),",
+				"          totalDeaths = sum(deaths)) ~> aggregationOnMap",
+				"aggregationOnMap filter(greater(totalKills, $killvalue)) ~> filterForKills",
+				"filterForKills sort(asc(map_description, true)) ~> sort1",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['filteredData.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> filteredData"
+			]
+		}
+	}
+}

@@ -1,0 +1,48 @@
+{
+	"name": "DS_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "map_description",
+				"type": "varchar"
+			},
+			{
+				"name": "game_type",
+				"type": "varchar"
+			},
+			{
+				"name": "weapon_description",
+				"type": "varchar"
+			},
+			{
+				"name": "weapon_group",
+				"type": "varchar"
+			},
+			{
+				"name": "weapon_class",
+				"type": "varchar"
+			},
+			{
+				"name": "deaths",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kills",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "killdeath"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

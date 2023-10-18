@@ -1,0 +1,61 @@
+{
+	"name": "DS_BLOB_OUPUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"outputfoder": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().outputfoder",
+					"type": "Expression"
+				},
+				"container": "adftraininginput"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "map_description",
+				"type": "String"
+			},
+			{
+				"name": "game_type",
+				"type": "String"
+			},
+			{
+				"name": "weapon_description",
+				"type": "String"
+			},
+			{
+				"name": "weapon_group",
+				"type": "String"
+			},
+			{
+				"name": "weapon_class",
+				"type": "String"
+			},
+			{
+				"name": "deaths",
+				"type": "String"
+			},
+			{
+				"name": "kills",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

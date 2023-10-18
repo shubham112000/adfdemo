@@ -1,0 +1,53 @@
+{
+	"name": "DS_BLOB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Kills_Deaths_And_Entertainment.csv",
+				"container": "adftraininginput"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "map_description",
+				"type": "String"
+			},
+			{
+				"name": "game_type",
+				"type": "String"
+			},
+			{
+				"name": "weapon_description",
+				"type": "String"
+			},
+			{
+				"name": "weapon_group",
+				"type": "String"
+			},
+			{
+				"name": "weapon_class",
+				"type": "String"
+			},
+			{
+				"name": "deaths",
+				"type": "String"
+			},
+			{
+				"name": "kills",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

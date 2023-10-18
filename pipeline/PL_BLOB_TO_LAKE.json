@@ -1,0 +1,68 @@
+{
+	"name": "PL_BLOB_TO_LAKE",
+	"properties": {
+		"activities": [
+			{
+				"name": "ACT_DATA_FLOW",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflowForTask3",
+						"type": "DataFlowReference",
+						"parameters": {
+							"killvalue": {
+								"value": "@pipeline().parameters.mykillvalue",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"filteredData": {
+								"output": {
+									"value": "@pipeline().parameters.destination",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceParameters": {
+							"filteredData": {
+								"schemaLinkedService": {
+									"output": {
+										"value": "@pipeline().parameters.destination",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"destination": {
+				"type": "string",
+				"defaultValue": "output"
+			},
+			"mykillvalue": {
+				"type": "int",
+				"defaultValue": 700
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-10-17T07:17:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
