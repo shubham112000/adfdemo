@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "training-adf-df-shu"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"LS_BLOB_connectionString": {
+			"value": ""
+		},
+		"LS_LAKE_accountKey": {
+			"value": ""
+		},
+		"LS_SQL_connectionString": {
+			"value": ""
+		},
+		"LS_LAKE_properties_typeProperties_url": {
+			"value": "https://trianingdatalake.dfs.core.windows.net/"
+		}
+	}
+}
